@@ -3,7 +3,7 @@
 void display::display_process() { 
 
   while (true) {
-    cout << "\tdisplay: (" << in1.read() << ")" << endl;
+    cout << "display: (" << in1.read() << ")" << endl;
     wait();
   }
 }

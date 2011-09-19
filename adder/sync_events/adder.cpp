@@ -7,22 +7,19 @@ void adder::adder_process() {
     tmp1 = in1.read();
     tmp2 = in2.read();
     result = tmp1 + tmp2;
-    cout << "\tadder: (" << tmp1 << "+" << tmp2 << "=" << result << ")";
+    cout << "adder: (" << tmp1 << "+" << tmp2 << "=" << result << ")\n";
+    cout << "adder_process: notify inc_process\n";
     sync_event.notify();
-    cout << "\tadder_process: waiting inc_process";
-    wait(sync_event);
-    cout << "adder: final result: (" << result << ")";
-    out1.write( result );
-    wait(clk);
+    wait();
   }
 }
 
 void adder::inc_process() {
   while ( true )  {
-    cout << "\n>>>inc: waiting adder\n";
+    cout << "inc: waiting adder ()\n";
     wait(sync_event);
-    cout << "\n>>>inc: (" << result << " + 1 = " << result + 1 << ")\n";
+    cout << "inc: (" << result << " + 1 = " << result + 1 << ")\n";
     result++;
-    sync_event.notify();
+    out1.write( result );
   }
 }
